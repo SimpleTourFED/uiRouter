@@ -64,7 +64,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     if($stateParams.id){
                         return $http({
                             method:'GET',
-                            url:'/detail/products/detail/'+$stateParams.id
+                            url:'/detail/tourisms/detail/'+$stateParams.id
                         }).then(function(resp){
                             return resp.data;
                         },function(resp){

@@ -5,9 +5,10 @@
     <table class="table">
         <thead>
         <tr>
-            <th style="width:30%">序号</th>
-            <th style="width:40%">名称</th>
-            <th style="width:30%">操作</th>
+            <th style="width:25%">序号</th>
+            <th style="width:25%">名称</th>
+            <th style="width:25%">价格</th>
+            <th style="width:25%">操作</th>
         </tr>
         </thead>
     </table>
@@ -15,10 +16,11 @@
         <table class="table">
             <tbody>
             <tr ng-repeat = "v in viewData">
-                <td style="width: 30%;" ng-bind="v.id"></td>
-                <td style="width: 40%;" ng-bind="v.name">
+                <td style="width: 25%;" ng-bind="v.id"></td>
+                <td style="width: 25%;" ng-bind="v.name">
+                <td style="width: 25%;" ng-bind="v.price">
                 </td>
-                <td style="width: 30%;">
+                <td style="width: 25%;">
                     <a ui-sref="tourismForm({id:v.id})">编辑</a>
                 </td>
             </tr>
