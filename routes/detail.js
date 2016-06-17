@@ -70,4 +70,40 @@ router.post('/product/add',function(req,res,next){
         }
     })
 });
+router.post('/product/edit',function(req,res,next){
+    var data = req.body,file = './public/data/productList.json';
+    fs.exists(file,function (exists) {
+        if(exists){
+            var tourismObj = JSON.parse(fs.readFileSync(file));
+            for(var i = 0,len = tourismObj.length;len < i; i++) {
+                if(data.id == tourismObj[i].id) {
+                    tourismObj[i].name =  data.name;
+                }
+            }
+            fs.writeFile(file,JSON.stringify(tourismObj),function () {
+                return res.json('success');
+            })
+        }else{
+
+        }
+    })
+});
+router.post('/product/edit',function(req,res,next){
+    var data = req.body,file = './public/data/tourismList.json';
+    fs.exists(file,function (exists) {
+        if(exists){
+            var tourismObj = JSON.parse(fs.readFileSync(file));
+            for(var i = 0,len = tourismObj.length;len < i; i++) {
+                if(data.id == tourismObj[i].id) {
+                    tourismObj[i].name =  data.name;
+                }
+            }
+            fs.writeFile(file,JSON.stringify(tourismObj),function () {
+                return res.json('success');
+            })
+        }else{
+
+        }
+    })
+});
 module.exports = router;
