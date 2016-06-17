@@ -10,7 +10,7 @@ app.controller('productFormCtrl', ['$scope','simpleObj','$http', function($scope
         e.preventDefault();
         $http.post('/detail/product/add',$scope.postData).success(function(data){
             console.log(data);
-            location.href = '/view/navBar.html#/list?url=~2Ftourisms.html&ctrl=tourismsCtrl&get=tourisms';
+            location.href = '/view/navBar.html#/list?url=~2Fproducts.html&ctrl=productsCtrl&get=products';
         }).error(function () {
             console.log('error');
         })
