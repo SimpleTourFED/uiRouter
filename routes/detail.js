@@ -66,7 +66,10 @@ router.post('/product/add',function(req,res,next){
                 return res.json('success');
             })
         }else{
-
+            data.id = 1;
+            fs.appendFile(file,JSON.stringify([data]),function () {
+                return res.json('success');
+            })
         }
     })
 });
