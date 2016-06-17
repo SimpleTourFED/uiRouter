@@ -110,10 +110,11 @@
     </div>
 </div>
 <div ui-view class="content"></div>
-<script src="/javascripts/angular.min.js"></script>
-<script src="/javascripts/angular-ui-router.min.js"></script>
-<script src="/javascripts/jquery.min.js"></script>
-<script src="/javascripts/index.js"></script>
+<script src="/lib/angular.min.js"></script>
+<script src="/lib/angular-ui-router.min.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/javascripts/router.js"></script>
+<script src="/javascripts/controller.js"></script>
 <script>
     (function ($) {
         $('.content').width($(window).width() - $('.firstNav').width() - $('.wrap').width() -10);
@@ -130,14 +131,12 @@
                 secondNav:[{
                     name:'产品',
                     imgUrl:'/images/icon_tourism.png',
-                    router: 'products',
                     templateUrl: '/products.html',
                     ctrlName: 'productsCtrl',
                     get:'products'
                 },{
                     name:'行程',
                     imgUrl:'/images/icon_product.png',
-                    router: 'tourisms',
                     templateUrl: '/tourisms.html',
                     ctrlName: 'tourismsCtrl',
                     get:'tourisms'
@@ -149,28 +148,24 @@
                 secondNav:[{
                     name:'车辆',
                     imgUrl:'/images/icon_bus.png',
-                    router: '/transport/bus/',
                     templateUrl: '/bus.html',
                     ctrlName: 'busCtrl',
                     get:'bus'
                 },{
                     name:'车次',
                     imgUrl:'/images/icon_busno.png',
-                    router: '/transport/busno/',
                     templateUrl: '/busno.html',
                     ctrlName: 'busnoCtrl',
                     get:'busno'
                 },{
                     name:'车辆布局',
                     imgUrl:'/images/icon_layout.png',
-                    router: '/transport/layout/',
                     templateUrl: '/layout.html',
                     ctrlName: 'layoutCtrl',
                     get:'layout'
                 },{
                     name:'线路',
                     imgUrl:'/images/icon_osp.png',
-                    router: '/transport/line/',
                     templateUrl: '/line.html',
                     ctrlName: 'lineCtrl',
                     get:'line'

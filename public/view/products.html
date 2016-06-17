@@ -19,12 +19,12 @@
                 <td style="width: 40%;" ng-bind="v.name">
                 </td>
                 <td style="width: 30%;">
-                    <a ui-sref="productEdit({url:'productEdit.html',ctrl:'productEditCtrl',id:v.id})">编辑</a>
+                    <a ui-sref="productForm({id:v.id})">编辑</a>
                 </td>
             </tr>
             </tbody>
         </table>
-        <a ui-sref="add({url:'productEdit.html',ctrl:'productEditCtrl'})">添加</a>
+        <a style="display:inline-block;width: 88px;height:34px;line-height: 34px;text-align: center;border-radius: 4px;background-color: #d84527;color: #ffffff;margin-left: 20px" ui-sref="productForm">添加</a>
     </div>
 </div>
 

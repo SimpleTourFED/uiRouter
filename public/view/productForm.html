@@ -1,0 +1,19 @@
+<div class="iframe_content">
+
+    <form name="form" method="post">
+        <h2>铲平,左边的写反了</h2>
+
+        <div class="offset">
+            <div class="input_group">
+                <label>产品名</label>
+
+                <div class="cutline"></div>
+                <span>
+                    <input type="text" name="count" ng-model="postData.name"/>
+                </span>
+            </div>
+        </div>
+        <button style="margin-top: 20px;border: 0;margin-left: 233px;display:inline-block;width: 88px;height:34px;line-height: 34px;text-align: center;border-radius: 4px;background-color: #d84527;color: #ffffff;"  ng-if="!postData.id" ng-click="submit($event)">增加</button>
+        <button style="margin-top: 20px;border: 0;margin-left: 233px;display:inline-block;width: 88px;height:34px;line-height: 34px;text-align: center;border-radius: 4px;background-color: #d84527;color: #ffffff;"  ng-if="postData.id" ng-click="submit($event)">编辑</button>
+    </form>
+</div>
