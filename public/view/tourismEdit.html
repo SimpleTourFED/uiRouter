@@ -1,0 +1,27 @@
+<div class="iframe_content">
+
+    <form name="form" method="post">
+        <h2>行程左边的路径写反了</h2>
+
+        <div class="offset">
+            <div class="input_group">
+                <label>行程名</label>
+
+                <div class="cutline"></div>
+                <span>
+                    <input type="text" name="count" ng-model="postData.name"/>
+                </span>
+            </div>
+            <div class="input_group">
+                <label>价格</label>
+
+                <div class="cutline"></div>
+                <span>
+                    <input type="text" name="count" ng-model="postData.price"/>
+                </span>
+            </div>
+        </div>
+        <button ng-if="!postData.id" ng-click="submit($event)">增加</button>
+        <button ng-if="postData.id" ng-click="submit($event)">编辑</button>
+    </form>
+</div>

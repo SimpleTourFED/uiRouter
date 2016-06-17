@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>navBar</title>
+    <link rel="stylesheet" href="/stylesheets/main_a340c41.css">
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/angular-ui-router.min.js"></script>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <style>
+        .content{
+            float: left;
+            height: 100%;
+            padding-left: 20px;
+            padding-top: 25px;
+        }
+        .cover {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: .4;
+            top: 0;
+            left: 0;
+        }
+        .content h1,.content h3{
+            font-size: 24px;
+        }
+        .secondNav .category span.click {
+            color: #d84527;
+        }
+        .secondNav .category span.click img {
+            margin-left: -42px;
+        }
+    </style>
+</head>
+<body ng-controller="mainController">
+<div class="firstNav">
+    <div>
+        <div class="logo">
+            <a>
+                <img src="/images/logo.png" alt=""/>
+                <div>Simple</div>
+                <div>tour</div>
+            </a>
+        </div>
+        <ul class="menu">
+            <li ng-class="{active: $index == index}" ng-click="chooseFirstNav($event,$index)" ng-repeat="nav in navBar track by $index">
+                <div>
+                    <img ng-src="{{nav.imgUrl}}"/>
+                </div>
+                <div class="describe" ng-bind="nav.name"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="close"></div>
+</div>
+<div class="wrap">
+    <div style="overflow: hidden; display: block;" class="secondNav">
+        <div class="category">
+            <a ng-repeat="nav in navBar[index].secondNav track by $index" ui-sref="list({url:nav.templateUrl,ctrl: nav.ctrlName})">
+                <span class="hotel" ng-class="{click: $index == secondNavIndex}" ng-click="clickSecondNav($event,$index)">
+                    <div class="category_img">
+                        <img ng-src="{{nav.imgUrl}}"/>
+                    </div>
+                    <div ng-bind="nav.name"></div>
+                </span>
+            </a>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div ui-view class="content"></div>
+<script>
+    app.controller('mainController',['$scope','$rootScope','$state','$http', function($scope,$rootScope,$state,$http) {
+        $scope.index = 0;
+        $scope.navBar = [
+            {
+                name: '产品',
+                imgUrl: '/images/nav_product.png',
+                secondNav:[{
+                    name:'行程',
+                    imgUrl:'/images/icon_tourism.png',
+                    router: 'products',
+                    templateUrl: 'products.html',
+                    ctrlName: 'productsCtrl'
+                },{
+                    name:'产品',
+                    imgUrl:'/images/icon_product.png',
+                    router: 'tourisms',
+                    templateUrl: 'tourisms.html',
+                    ctrlName: 'tourismsCtrl'
+                }]
+            },
+            {
+                name: '车辆',
+                imgUrl: '/images/nav_bus.png',
+                secondNav:[{
+                    name:'车辆',
+                    imgUrl:'/images/icon_bus.png',
+                    router: '/transport/bus/',
+                    templateUrl: 'bus.html',
+                    ctrlName: 'busCtrl'
+                },{
+                    name:'车次',
+                    imgUrl:'/images/icon_busno.png',
+                    router: '/transport/busno/',
+                    templateUrl: 'busno.html',
+                    ctrlName: 'busnoCtrl'
+                },{
+                    name:'车辆布局',
+                    imgUrl:'/images/icon_layout.png',
+                    router: '/transport/layout/',
+                    templateUrl: 'layout.html',
+                    ctrlName: 'layoutCtrl'
+                },{
+                    name:'线路',
+                    imgUrl:'/images/icon_osp.png',
+                    router: '/transport/line/',
+                    templateUrl: 'line.html',
+                    ctrlName: 'lineCtrl'
+                }]
+            }
+        ];
+        $scope.chooseFirstNav = function($event,$index) {
+            $scope.index = $index;
+            $scope.secondNavIndex = null;
+        };
+        $scope.clickSecondNav = function($event,$index) {
+            $scope.secondNavIndex = $index;
+        };
+        $rootScope.$on('$stateChangeStart',
+                function(event, toState, toParams, fromState, fromParams){
+                    $('body').append('<div class="cover"></div>');
+                });
+        $rootScope.$on('$stateChangeSuccess',
+                function(event, toState, toParams,fromState, fromParams){
+                    $('.cover').remove();
+                })
+    }]);
+</script>
+</body>
+</html>

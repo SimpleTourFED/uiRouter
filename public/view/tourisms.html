@@ -1,0 +1,29 @@
+<h1>这里是行程列表</h1>
+<div class="search-wrapper">
+</div>
+<div class="container_main">
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width:30%">序号</th>
+            <th style="width:40%">名称</th>
+            <th style="width:30%">操作</th>
+        </tr>
+        </thead>
+    </table>
+    <div class="grid" tabindex="5000" style="overflow: hidden; outline: none;">
+        <table class="table">
+            <tbody>
+            <tr ng-repeat = "v in viewData">
+                <td style="width: 30%;" ng-bind="v.id"></td>
+                <td style="width: 40%;" ng-bind="v.name">
+                </td>
+                <td style="width: 30%;">
+                    <a ui-sref="tourismEdit({url:'tourismEdit.html',ctrl:'tourismEditCtrl',id:v.id})">编辑</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a ui-sref="add({url:'tourismEdit.html',ctrl:'tourismEditCtrl'})">添加</a>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+//
+   Created by ashbringer on 16/5/31.
+doctype html
+html(ng-app="app")
+    head
+        meta(charset="utf-8")
+        script(src='/javascripts/angular.min.js')
+    body(ng-controller="ctrl")
+        p welcome #{name}
+        p(ng-bind="'welcome'+name+'id='+id")
+        button(ng-click="click()") 点我
+        script.
+            angular.module('app',[]).controller('ctrl',function($scope,$http){
+                $scope.click=function(){
+                    console.log(1);
+                    $http.post('/list/post').success(function(data){
+                        $scope.name = data.data.name;
+                        $scope.id = data.data.id;
+                    })
+                }
+            })
