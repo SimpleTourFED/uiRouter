@@ -22,12 +22,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // product
         .state('products', {
             url: '/products',
-            views: {
-                "lazyLoadView": {
-                    controller: 'productsCtrl', 
-                    templateUrl: '/view/products.html'
-                }
-            },
+            templateUrl: '/view/product/products.html',
+            controller: 'productsCtrl',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
@@ -35,7 +31,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 simpleObj: function ($http) {
                     return $http({
                         method:'GET',
-                        url:'/products/list'
+                        url:'products/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
@@ -45,12 +41,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('productForm', {
             url: 'product/form?id',
-            views: {
-                "lazyLoadView": {
-                    controller: 'productFormCtrl', 
-                    templateUrl: '/view/productForm.html'
-                }
-            },
+            controller: 'productFormCtrl',
+            templateUrl: '/view/product/productForm.html',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
@@ -73,12 +65,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // tourism
         .state('tourisms', {
             url: '/tourisms',
-            views: {
-                "lazyLoadView": {
-                    controller: 'tourismsCtrl',
-                    templateUrl: '/view/tourisms.html'
-                }
-            },
+            controller: 'tourismsCtrl',
+            templateUrl: '/view/product/tourisms.html',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
@@ -86,7 +74,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 simpleObj: function ($http) {
                     return $http({
                         method:'GET',
-                        url:'/tourisms/list'
+                        url:'tourisms/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
@@ -96,12 +84,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('tourismForm', {
             url: 'tourism/form?id',
-            views: {
-                "lazyLoadView": {
-                    controller: 'tourismFormCtrl',
-                    templateUrl: '/view/tourismForm.html'
-                }
-            },
+            controller: 'tourismFormCtrl',
+            templateUrl: '/view/product/tourismForm.html',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
@@ -128,12 +112,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // bus
         .state('bus', {
             url: '/bus',
-            views: {
-                "lazyLoadView": {
-                    controller: 'busCtrl', // This view will use AppCtrl loaded below in the resolve
-                    templateUrl: '/view/bus.html'
-                }
-            },
+            controller: 'busCtrl',
+            templateUrl: '/view/bus/bus.html',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/bus.js');
@@ -141,7 +121,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 simpleObj: function ($stateParams,$http) {
                     return $http({
                         method:'GET',
-                        url:'/bus/list'
+                        url:'bus/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
@@ -151,7 +131,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('busForm', {
             url: 'bus/form?id',
-            templateUrl: '/view/busForm.html',
+            templateUrl: '/view/bus/busForm.html',
             controller: 'busFormCtrl',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -161,7 +141,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     if($stateParams.id){
                         return $http({
                             method:'GET',
-                            url:'/detail/products/detail/'+$stateParams.id
+                            url:'/detail/bus/detail/'+$stateParams.id
                         }).then(function(resp){
                             return resp.data;
                         },function(resp){
@@ -175,12 +155,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // busno
         .state('busno', {
             url: '/busno',
-            views: {
-                "lazyLoadView": {
-                    controller: 'busnoCtrl', // This view will use AppCtrl loaded below in the resolve
-                    templateUrl: '/view/busno.html'
-                }
-            },
+            controller: 'busnoCtrl', // This view will use AppCtrl loaded below in the resolve
+            templateUrl: '/view/bus/busno.html',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/bus.js');
@@ -188,7 +164,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 simpleObj: function ($stateParams,$http) {
                     return $http({
                         method:'GET',
-                        url:'/busno/list'
+                        url:'busno/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
@@ -198,7 +174,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('busnoForm', {
             url: 'busno/form?id',
-            templateUrl: '/view/busnoForm.html',
+            templateUrl: '/view/bus/busnoForm.html',
             controller: 'busnoFormCtrl',
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -208,7 +184,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     if($stateParams.id){
                         return $http({
                             method:'GET',
-                            url:'/detail/products/detail/'+$stateParams.id
+                            url:'/detail/busno/detail/'+$stateParams.id
                         }).then(function(resp){
                             return resp.data;
                         },function(resp){

@@ -71,6 +71,9 @@
             vertical-align: top;
             border-top: 1px solid #ddd;
         }
+        .secondNav .category span {
+            display: none;
+        }
     </style>
 </head>
 <body ng-controller="mainController">
@@ -84,11 +87,23 @@
             </a>
         </div>
         <ul class="menu">
-            <li ng-class="{active: $index == index}" ng-click="chooseFirstNav($event,$index)" ng-repeat="nav in navBar track by $index">
+            <!--<li ng-class="{active: $index == index}" ng-click="chooseFirstNav($event,$index)" ng-repeat="nav in navBar track by $index">-->
+                <!--<div>-->
+                    <!--<img ng-src="{{nav.imgUrl}}"/>-->
+                <!--</div>-->
+                <!--<div class="describe" ng-bind="nav.name"></div>-->
+            <!--</li>-->
+            <li data-type="product">
                 <div>
-                    <img ng-src="{{nav.imgUrl}}"/>
+                    <img src="/images/nav_product.png"/>
                 </div>
-                <div class="describe" ng-bind="nav.name"></div>
+                <div class="describe">产品</div>
+            </li>
+            <li data-type="bus">
+                <div>
+                    <img src="/images/nav_bus.png"/>
+                </div>
+                <div class="describe">车辆</div>
             </li>
         </ul>
     </div>
@@ -97,12 +112,45 @@
 <div class="wrap">
     <div style="overflow: hidden; display: block;" class="secondNav">
         <div class="category">
-            <a ng-repeat="nav in navBar[index].secondNav track by $index" ui-sref="list({url:nav.templateUrl,ctrl: nav.ctrlName,get:nav.get})">
-                <span class="hotel" ng-class="{click: $index == secondNavIndex}" ng-click="clickSecondNav($event,$index)">
+            <!--<a ng-repeat="nav in navBar[index].secondNav track by $index" ui-sref="list({url:nav.templateUrl,ctrl: nav.ctrlName,get:nav.get})">-->
+                <!--<span class="hotel" ng-class="{click: $index == secondNavIndex}" ng-click="clickSecondNav($event,$index)">-->
+                    <!--<div class="category_img">-->
+                        <!--<img ng-src="{{nav.imgUrl}}"/>-->
+                    <!--</div>-->
+                    <!--<div ng-bind="nav.name"></div>-->
+                <!--</span>-->
+            <!--</a>-->
+
+            <a ui-sref="products">
+                <span class="product">
                     <div class="category_img">
-                        <img ng-src="{{nav.imgUrl}}"/>
+                        <img src="/images/icon_tourism.png"/>
                     </div>
-                    <div ng-bind="nav.name"></div>
+                    <div >产品</div>
+                </span>
+            </a>
+            <a ui-sref="tourisms">
+                <span class="product">
+                    <div class="category_img">
+                        <img src="/images/icon_product.png"/>
+                    </div>
+                    <div >行程</div>
+                </span>
+            </a>
+            <a ui-sref="bus">
+                <span class="bus">
+                    <div class="category_img">
+                        <img src="/images/icon_bus.png"/>
+                    </div>
+                    <div >车辆</div>
+                </span>
+            </a>
+            <a ui-sref="busno">
+                <span class="bus">
+                    <div class="category_img">
+                        <img src="/images/icon_busno.png"/>
+                    </div>
+                    <div >车次</div>
                 </span>
             </a>
             <div class="clear"></div>
@@ -122,63 +170,21 @@
             $('.content').width($(window).width() - $('.firstNav').width() - $('.wrap').width() -10);
         })
     })(jQuery);
+    $(document).ready(function() {
+        $('.menu li').click(function(e) {
+            var $this = $(this);
+            $('.menu li').removeClass('active');
+            $this.addClass('active');
+
+            $('.category span').hide();
+            $('.category span.'+$this.attr('data-type')).show();
+        });
+        $('.secondNav .category span').click(function() {
+            $('.secondNav .category span').removeClass('click');
+            $(this).addClass('click');
+        });
+    });
     app.controller('mainController',['$scope','$rootScope','$state','$http', function($scope,$rootScope,$state,$http) {
-        $scope.index = 0;
-        $scope.navBar = [
-            {
-                name: '产品',
-                imgUrl: '/images/nav_product.png',
-                secondNav:[{
-                    name:'产品',
-                    imgUrl:'/images/icon_tourism.png',
-                    templateUrl: '/products.html',
-                    ctrlName: 'productsCtrl',
-                    get:'products'
-                },{
-                    name:'行程',
-                    imgUrl:'/images/icon_product.png',
-                    templateUrl: '/tourisms.html',
-                    ctrlName: 'tourismsCtrl',
-                    get:'tourisms'
-                }]
-            },
-            {
-                name: '车辆',
-                imgUrl: '/images/nav_bus.png',
-                secondNav:[{
-                    name:'车辆',
-                    imgUrl:'/images/icon_bus.png',
-                    templateUrl: '/bus.html',
-                    ctrlName: 'busCtrl',
-                    get:'bus'
-                },{
-                    name:'车次',
-                    imgUrl:'/images/icon_busno.png',
-                    templateUrl: '/busno.html',
-                    ctrlName: 'busnoCtrl',
-                    get:'busno'
-                },{
-                    name:'车辆布局',
-                    imgUrl:'/images/icon_layout.png',
-                    templateUrl: '/layout.html',
-                    ctrlName: 'layoutCtrl',
-                    get:'layout'
-                },{
-                    name:'线路',
-                    imgUrl:'/images/icon_osp.png',
-                    templateUrl: '/line.html',
-                    ctrlName: 'lineCtrl',
-                    get:'line'
-                }]
-            }
-        ];
-        $scope.chooseFirstNav = function($event,$index) {
-            $scope.index = $index;
-            $scope.secondNavIndex = null;
-        };
-        $scope.clickSecondNav = function($event,$index) {
-            $scope.secondNavIndex = $index;
-        }
         $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams){
                     $('body').append('<div class="cover"></div>');

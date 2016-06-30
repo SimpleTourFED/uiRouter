@@ -27,7 +27,7 @@ router.get('/tourisms/list',function(req,res,next){
     });
 });
 router.get('/bus/list',function(req,res,next){
-    var file = './public/data/busList.json';
+    var file = './public/data/bus.json';
     fs.exists(file,function (exists) {
         if(exists){
             return res.json(JSON.parse(fs.readFileSync(file)));
