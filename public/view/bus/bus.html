@@ -1,0 +1,30 @@
+<h1>这里是bus</h1>
+<div class="search-wrapper">
+</div>
+<div class="container_main">
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width:30%">序号</th>
+            <th style="width:40%">名称</th>
+            <th style="width:30%">操作</th>
+        </tr>
+        </thead>
+    </table>
+    <div class="grid" tabindex="5000" style="overflow: hidden; outline: none;">
+        <table class="table">
+            <tbody>
+            <tr ng-repeat="v in viewData">
+                <td style="width: 30%;" ng-bind="v.id"></td>
+                <td style="width: 40%;" ng-bind="v.name">
+                </td>
+                <td style="width: 30%;">
+                    <a ui-sref="busForm({id:v.id})">编辑</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a style="display:inline-block;width: 88px;height:34px;line-height: 34px;text-align: center;border-radius: 4px;background-color: #d84527;color: #ffffff;margin-left: 20px" ui-sref="busForm">添加</a>
+    </div>
+</div>
+

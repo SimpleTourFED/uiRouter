@@ -10,7 +10,7 @@ app.controller('productFormCtrl', ['$scope','simpleObj','$http', function($scope
         e.preventDefault();
         $http.post('/detail/product/add',$scope.postData).success(function(data){
             console.log(data);
-            location.href = '/view/navBar.html#/list?url=~2Fproducts.html&ctrl=productsCtrl&get=products';
+            location.href = '/view/index.html#/list?url=~2Fproducts.html&ctrl=productsCtrl&get=products';
         }).error(function () {
             console.log('error');
         })
@@ -22,7 +22,7 @@ app.controller('tourismFormCtrl', ['$scope','simpleObj', '$http',function($scope
         e.preventDefault();
         $http.post('/detail/tourism/add',$scope.postData).success(function(data){
             console.log(data);
-            location.href = '/view/navBar.html#/list?url=~2Ftourisms.html&ctrl=tourismsCtrl&get=tourisms';
+            location.href = '/view/index.html#/list?url=~2Ftourisms.html&ctrl=tourismsCtrl&get=tourisms';
         }).error(function () {
             console.log('error');
         })

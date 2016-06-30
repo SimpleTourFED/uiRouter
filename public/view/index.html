@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <title>navBar</title>
     <link rel="stylesheet" href="/stylesheets/main_a340c41.css">
-    <script src="/javascripts/angular.min.js"></script>
-    <script src="/javascripts/angular-ui-router.min.js"></script>
-    <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/index.js"></script>
     <style>
         .content{
             float: left;
             height: 100%;
-            padding-left: 20px;
-            padding-top: 25px;
         }
         .cover {
             position: fixed;
@@ -26,6 +20,9 @@
         }
         .content h1,.content h3{
             font-size: 24px;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-bottom: 20px;
         }
         .secondNav .category span.click {
             color: #d84527;
@@ -33,13 +30,54 @@
         .secondNav .category span.click img {
             margin-left: -42px;
         }
+        .content .list .head div {
+            display: inline-block;
+            float: left;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #bdbdbd;
+
+        }
+        .content .list .item div{
+            display: inline-block;
+            float: left;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #bdbdbd;
+        }
+        .content .list .item a{
+            font-size: 16px;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        table {
+            max-width: 100%;
+            background-color: transparent;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .table caption+thead tr:first-child th, .table caption+thead tr:first-child td, .table colgroup+thead tr:first-child th, .table colgroup+thead tr:first-child td, .table thead:first-child tr:first-child th, .table thead:first-child tr:first-child td {
+            border-top: 0;
+        }
+        .table thead th {
+            vertical-align: bottom;
+        }
+        .table th, .table td {
+            padding: 8px;
+            line-height: 20px;
+            text-align: left;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
     </style>
 </head>
 <body ng-controller="mainController">
 <div class="firstNav">
     <div>
         <div class="logo">
-            <a>
+            <a ui-sref="/welcome">
                 <img src="/images/logo.png" alt=""/>
                 <div>Simple</div>
                 <div>tour</div>
@@ -59,7 +97,7 @@
 <div class="wrap">
     <div style="overflow: hidden; display: block;" class="secondNav">
         <div class="category">
-            <a ng-repeat="nav in navBar[index].secondNav track by $index" ui-sref="list({url:nav.templateUrl,ctrl: nav.ctrlName})">
+            <a ng-repeat="nav in navBar[index].secondNav track by $index" ui-sref="list({url:nav.templateUrl,ctrl: nav.ctrlName,get:nav.get})">
                 <span class="hotel" ng-class="{click: $index == secondNavIndex}" ng-click="clickSecondNav($event,$index)">
                     <div class="category_img">
                         <img ng-src="{{nav.imgUrl}}"/>
@@ -72,7 +110,18 @@
     </div>
 </div>
 <div ui-view class="content"></div>
+<script src="/lib/angular.min.js"></script>
+<script src="/lib/angular-ui-router.min.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/ocLazyLoad.min.js"></script>
+<script src="/javascripts/router.js"></script>
 <script>
+    (function ($) {
+        $('.content').width($(window).width() - $('.firstNav').width() - $('.wrap').width() -10);
+        $(window).resize(function(){
+            $('.content').width($(window).width() - $('.firstNav').width() - $('.wrap').width() -10);
+        })
+    })(jQuery);
     app.controller('mainController',['$scope','$rootScope','$state','$http', function($scope,$rootScope,$state,$http) {
         $scope.index = 0;
         $scope.navBar = [
@@ -80,17 +129,17 @@
                 name: '产品',
                 imgUrl: '/images/nav_product.png',
                 secondNav:[{
-                    name:'行程',
-                    imgUrl:'/images/icon_tourism.png',
-                    router: 'products',
-                    templateUrl: 'products.html',
-                    ctrlName: 'productsCtrl'
-                },{
                     name:'产品',
+                    imgUrl:'/images/icon_tourism.png',
+                    templateUrl: '/products.html',
+                    ctrlName: 'productsCtrl',
+                    get:'products'
+                },{
+                    name:'行程',
                     imgUrl:'/images/icon_product.png',
-                    router: 'tourisms',
-                    templateUrl: 'tourisms.html',
-                    ctrlName: 'tourismsCtrl'
+                    templateUrl: '/tourisms.html',
+                    ctrlName: 'tourismsCtrl',
+                    get:'tourisms'
                 }]
             },
             {
@@ -99,27 +148,27 @@
                 secondNav:[{
                     name:'车辆',
                     imgUrl:'/images/icon_bus.png',
-                    router: '/transport/bus/',
-                    templateUrl: 'bus.html',
-                    ctrlName: 'busCtrl'
+                    templateUrl: '/bus.html',
+                    ctrlName: 'busCtrl',
+                    get:'bus'
                 },{
                     name:'车次',
                     imgUrl:'/images/icon_busno.png',
-                    router: '/transport/busno/',
-                    templateUrl: 'busno.html',
-                    ctrlName: 'busnoCtrl'
+                    templateUrl: '/busno.html',
+                    ctrlName: 'busnoCtrl',
+                    get:'busno'
                 },{
                     name:'车辆布局',
                     imgUrl:'/images/icon_layout.png',
-                    router: '/transport/layout/',
-                    templateUrl: 'layout.html',
-                    ctrlName: 'layoutCtrl'
+                    templateUrl: '/layout.html',
+                    ctrlName: 'layoutCtrl',
+                    get:'layout'
                 },{
                     name:'线路',
                     imgUrl:'/images/icon_osp.png',
-                    router: '/transport/line/',
-                    templateUrl: 'line.html',
-                    ctrlName: 'lineCtrl'
+                    templateUrl: '/line.html',
+                    ctrlName: 'lineCtrl',
+                    get:'line'
                 }]
             }
         ];
@@ -129,7 +178,7 @@
         };
         $scope.clickSecondNav = function($event,$index) {
             $scope.secondNavIndex = $index;
-        };
+        }
         $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams){
                     $('body').append('<div class="cover"></div>');
