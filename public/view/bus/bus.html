@@ -1,12 +1,13 @@
-<h1>这里是bus</h1>
+<h1>这里是busno</h1>
 <div class="search-wrapper">
 </div>
 <div class="container_main">
     <table class="table">
         <thead>
         <tr>
-            <th style="width:30%">序号</th>
-            <th style="width:40%">名称</th>
+            <th style="width:10%">序号</th>
+            <th style="width:30%">名称</th>
+            <th style="width:30%">车牌</th>
             <th style="width:30%">操作</th>
         </tr>
         </thead>
@@ -15,9 +16,9 @@
         <table class="table">
             <tbody>
             <tr ng-repeat="v in viewData">
-                <td style="width: 30%;" ng-bind="v.id"></td>
-                <td style="width: 40%;" ng-bind="v.name">
-                </td>
+                <td style="width: 10%;" ng-bind="v.id"></td>
+                <td style="width: 30%;" ng-bind="v.name"></td>
+                <td style="width: 30%;" ng-bind="v.lisence"></td>
                 <td style="width: 30%;">
                     <a ui-sref="busForm({id:v.id})">编辑</a>
                 </td>
