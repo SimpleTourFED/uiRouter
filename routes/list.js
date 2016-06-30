@@ -26,4 +26,24 @@ router.get('/tourisms/list',function(req,res,next){
         }
     });
 });
+router.get('/bus/list',function(req,res,next){
+    var file = './public/data/busList.json';
+    fs.exists(file,function (exists) {
+        if(exists){
+            return res.json(JSON.parse(fs.readFileSync(file)));
+        }else{
+            return res.json([]);
+        }
+    });
+});
+router.get('/busno/list',function(req,res,next){
+    var file = './public/data/busno.json';
+    fs.exists(file,function (exists) {
+        if(exists){
+            return res.json(JSON.parse(fs.readFileSync(file)));
+        }else{
+            return res.json([]);
+        }
+    });
+});
 module.exports = router;

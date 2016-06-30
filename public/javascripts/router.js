@@ -21,7 +21,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/products',
             views: {
                 "lazyLoadView": {
-                    controller: 'productsCtrl', // This view will use AppCtrl loaded below in the resolve
+                    controller: 'productsCtrl', 
                     templateUrl: '/view/products.html'
                 }
             },
@@ -29,10 +29,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
                 }],
-                simpleObj: function ($stateParams,$http) {
+                simpleObj: function ($http) {
                     return $http({
                         method:'GET',
-                        url:$stateParams.get+'/list'
+                        url:'/products/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
@@ -42,8 +42,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('productForm', {
             url: 'product/form?id',
-            templateUrl: '/view/productForm.html',
-            controller: 'productFormCtrl',
+            views: {
+                "lazyLoadView": {
+                    controller: 'productFormCtrl', 
+                    templateUrl: '/view/productForm.html'
+                }
+            },
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
@@ -66,16 +70,20 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
         .state('tourisms', {
             url: '/tourisms',
-            templateUrl: '/view/tourisms.html',
-            controller: 'tourismsCtrl',
+            views: {
+                "lazyLoadView": {
+                    controller: 'tourismsCtrl',
+                    templateUrl: '/view/tourisms.html'
+                }
+            },
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
                 }],
-                simpleObj: function ($stateParams,$http) {
+                simpleObj: function ($http) {
                     return $http({
                         method:'GET',
-                        url:$stateParams.get+'/list'
+                        url:'/tourisms/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
@@ -85,6 +93,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('tourismForm', {
             url: 'tourism/form?id',
+            views: {
+                "lazyLoadView": {
+                    controller: 'tourismFormCtrl',
+                    templateUrl: '/view/tourismForm.html'
+                }
+            },
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('/javascripts/controllers/product.js');
@@ -103,8 +117,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 }
             },
-            templateUrl: '/view/tourismForm.html',
-            controller: 'tourismFormCtrl'
         })
         
         // bus
@@ -123,7 +135,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 simpleObj: function ($stateParams,$http) {
                     return $http({
                         method:'GET',
-                        url:$stateParams.get+'/list'
+                        url:'/bus/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
@@ -154,28 +166,50 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        
-        .state('list', {
-            url: '/list?url&ctrl&get',
+        .state('busno', {
+            url: '/busno',
+            views: {
+                "lazyLoadView": {
+                    controller: 'busnoCtrl', // This view will use AppCtrl loaded below in the resolve
+                    templateUrl: '/view/busno.html'
+                }
+            },
             resolve: {
                 loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load('/javascripts/controllers/product.js');
+                    return $ocLazyLoad.load('/javascripts/controllers/bus.js');
                 }],
                 simpleObj: function ($stateParams,$http) {
                     return $http({
                         method:'GET',
-                        url:$stateParams.get+'/list'
+                        url:'/busno/list'
                     }).then(function(resp){
                         return resp.data;
                     },function(resp){
                     });
                 }
             },
-            templateUrl: function ($stateParams) {
-                return '/view/'+$stateParams.url
-            },
-            controllerProvider: function ($stateParams) {
-                return $stateParams.ctrl
+        })
+        .state('busnoForm', {
+            url: 'busno/form?id',
+            templateUrl: '/view/busnoForm.html',
+            controller: 'busnoFormCtrl',
+            resolve: {
+                loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load('/javascripts/controllers/bus.js');
+                }],
+                simpleObj: function ($stateParams,$http) {
+                    if($stateParams.id){
+                        return $http({
+                            method:'GET',
+                            url:'/detail/products/detail/'+$stateParams.id
+                        }).then(function(resp){
+                            return resp.data;
+                        },function(resp){
+                        });
+                    }else{
+                        return false
+                    }
+                }
             }
         })
 });
