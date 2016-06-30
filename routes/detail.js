@@ -51,7 +51,10 @@ router.post('/tourism/add',function(req,res,next){
                 return res.json('success');
             })
         }else{
-
+            data.id = 1;
+            fs.appendFile(file,JSON.stringify([data]),function () {
+                return res.json('success');
+            })
         }
     })
 });
@@ -87,7 +90,10 @@ router.post('/product/edit',function(req,res,next){
                 return res.json('success');
             })
         }else{
-
+            data.id = 1;
+            fs.appendFile(file,JSON.stringify([data]),function () {
+                return res.json('success');
+            })
         }
     })
 });
