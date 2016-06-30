@@ -16,6 +16,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
     // $urlRouterProvider.otherwise("/list");
     //
     $stateProvider
+        /****************  
+        **  product路由 **
+        *****************/
         // product
         .state('products', {
             url: '/products',
@@ -67,7 +70,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-
+        // tourism
         .state('tourisms', {
             url: '/tourisms',
             views: {
@@ -118,7 +121,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 }
             },
         })
-        
+
+        /****************
+         **  bus路由    **
+         *****************/
         // bus
         .state('bus', {
             url: '/bus',
@@ -166,6 +172,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        // busno
         .state('busno', {
             url: '/busno',
             views: {
